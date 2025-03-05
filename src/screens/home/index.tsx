@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { FlatList, View } from "react-native";
+import { View } from "react-native";
 import artToolApi from "../../apis/artToolApi";
 import ArtToolCard from "../../components/ArtToolCard";
 import { ArtTool } from "../../types/artTool";
 import { Chip } from "react-native-paper";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function HomeScreen() {
   const [artTools, setArtTools] = useState<ArtTool[]>([]);

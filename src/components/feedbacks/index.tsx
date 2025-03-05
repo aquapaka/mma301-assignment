@@ -1,6 +1,7 @@
 import { Card, Text } from "react-native-paper";
 import { ArtTool } from "../../types/artTool";
 import RatingOverview from "./RatingOverview";
+import FeedbacksSection from "./FeedbacksSection";
 
 export default function Feedbacks({ artTool }: { artTool: ArtTool }) {
   return (
@@ -9,6 +10,8 @@ export default function Feedbacks({ artTool }: { artTool: ArtTool }) {
         <Text variant="titleMedium">Feedbacks</Text>
 
         <RatingOverview artTool={artTool} />
+
+        <FeedbacksSection feedbacks={artTool.feedbacks} />
       </Card.Content>
     </Card>
   );
