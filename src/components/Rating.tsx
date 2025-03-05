@@ -5,6 +5,7 @@ export default function Rating({ rating }: { rating: number }) {
   const fullCount = Math.floor(rating);
   const hasHalf = fullCount < rating;
 
+
   if (rating > 5 || rating < 0) throw Error("Rating must be from 1 to 5");
 
   return (

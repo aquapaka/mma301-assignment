@@ -16,6 +16,10 @@ const artToolApi = {
     const response = await axiosInstance.get(artToolResourceName);
     return response.data;
   },
+  getById: async (id: string): Promise<ArtTool> => {
+    const response = await axiosInstance.get(artToolResourceName + `/${id}`);
+    return response.data;
+  },
 };
 
 export default artToolApi;

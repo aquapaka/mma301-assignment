@@ -33,6 +33,7 @@ export default function HomeScreen() {
           <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
             {brands.map((brand) => (
               <Chip
+                key={brand}
                 selected={selectedBrands.includes(brand)}
                 onPress={() =>
                   setSelectedBrands((selectedBrands) =>

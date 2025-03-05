@@ -1,3 +1,4 @@
+import "./gesture-handler";
 import "@expo/metro-runtime";
 import RootTabNavigator from "./src/navigation/RootTabNavigator";
 import { PaperProvider } from "react-native-paper";

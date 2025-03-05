@@ -1,14 +1,27 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { ArtTool } from "../types/artTool";
 import { calculateAvgRating, formatTwoDecimal } from "../utils/utils";
 import Rating from "./Rating";
+import {
+  HomeStackParamList,
+  RootTabParamList,
+} from "../types/navigationParamLists";
 
 export default function ArtToolCard({ artTool }: { artTool: ArtTool }) {
-  function onCardPress() {}
+  const navigation =
+    useNavigation<NavigationProp<RootTabParamList & HomeStackParamList>>();
+
+  function onCardPress(id: string) {
+    navigation.navigate("Detail", { id });
+  }
 
   return (
-    <TouchableOpacity style={{ flex: 1 }} onPress={onCardPress}>
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() => onCardPress(artTool.id)}
+    >
       <Card style={{ flex: 1 }}>
         <Card.Content style={{ gap: 8, height: "100%" }}>
           <View
