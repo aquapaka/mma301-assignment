@@ -5,7 +5,7 @@ module.exports = {
   plugins: ["prettier"],
   rules: {
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         endOfLine: "auto",
       },
