@@ -1,36 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Menu, Divider, Button } from "react-native-paper";
+import artToolApi from "../../apis/artToolApi";
+import ArtToolList from "../../components/ArtToolList";
+import { useStorage } from "../../context/StorageProvider";
+import { ArtTool } from "../../types/artTool";
 
 export default function FavoriteScreen() {
-  const [visible, setVisible] = useState(false);
+  const [artTools, setArtTools] = useState<ArtTool[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
+  const { storage, loading: storageLoading } = useStorage();
+  const favoriteIds: string[] = storage.favoriteIds;
+  const favoriteArtTools = favoriteIds
+    ? artTools.filter((at) => favoriteIds.includes(at.id))
+    : [];
 
-  const openMenu = () => setVisible(true);
+  useEffect(() => {
+    async function fetchData() {
+      setIsFetching(true);
+      const artTools = await artToolApi.getAll();
+      setArtTools(artTools);
+      setIsFetching(false);
+    }
 
-  const closeMenu = () => setVisible(false);
+    fetchData();
+  }, []);
 
   return (
-    <View
-      style={{
-        paddingTop: 50,
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
-    >
-      <Menu
-        visible={visible}
-        onDismiss={closeMenu}
-        anchor={<Button onPress={openMenu}>Show menu</Button>}
-      >
-        <Menu.Item
-          leadingIcon={"lock-alert-outline"}
-          onPress={() => {}}
-          title="Item 1"
-        />
-        <Menu.Item leadingIcon={"redo"} onPress={() => {}} title="Item 2" />
-        <Divider />
-        <Menu.Item onPress={() => {}} title="Item 3" />
-      </Menu>
+    <View>
+      <ArtToolList
+        artTools={favoriteArtTools}
+        isFetching={isFetching || storageLoading}
+      />
     </View>
   );
 }

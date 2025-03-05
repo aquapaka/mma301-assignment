@@ -1,20 +1,36 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Image, TouchableOpacity, View } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { useEffect } from "react";
+import {
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import { Card, IconButton, Text } from "react-native-paper";
+import { useStorage } from "../context/StorageProvider";
 import { ArtTool } from "../types/artTool";
-import { calculateAvgRating, formatTwoDecimal } from "../utils/utils";
-import Rating from "./Rating";
 import {
   HomeStackParamList,
   RootTabParamList,
 } from "../types/navigationParamLists";
+import { calculateAvgRating, formatTwoDecimal } from "../utils/utils";
+import Rating from "./Rating";
 
 export default function ArtToolCard({ artTool }: { artTool: ArtTool }) {
   const navigation =
     useNavigation<NavigationProp<RootTabParamList & HomeStackParamList>>();
+  const {
+    storage,
+    addFavorite,
+    removeFavorite,
+    loading: storageLoading,
+  } = useStorage();
+  const favoriteIds: string[] = storage.favoriteIds ? storage.favoriteIds : [];
+  const isFavorited = favoriteIds.includes(artTool.id);
 
   function onCardPress(id: string) {
-    navigation.navigate("Detail", { id });
+    // @ts-ignore
+    navigation.navigate("HomeStack", { screen: "Detail", params: { id: id } });
   }
 
   return (
@@ -37,7 +53,33 @@ export default function ArtToolCard({ artTool }: { artTool: ArtTool }) {
           </View>
 
           {/* Title, price and rating */}
-          <Text variant="labelSmall">{artTool.brand}</Text>
+          <View>
+            <Text variant="labelSmall">{artTool.brand}</Text>
+            <TouchableWithoutFeedback>
+              <IconButton
+                style={{
+                  position: "absolute",
+                  top: -8,
+                  right: -4,
+                  justifyContent: "center",
+                  padding: 0,
+                  margin: 0,
+                  aspectRatio: 1,
+                }}
+                onPress={() => {
+                  if (isFavorited) {
+                    removeFavorite(artTool.id);
+                    return;
+                  }
+                  addFavorite(artTool.id);
+                }}
+                icon={isFavorited ? "heart" : "heart-outline"}
+                iconColor="crimson"
+                size={20}
+              />
+            </TouchableWithoutFeedback>
+          </View>
+
           <Text variant="titleSmall" style={{ textAlign: "justify" }}>
             {artTool.artName}
           </Text>

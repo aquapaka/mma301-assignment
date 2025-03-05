@@ -1,9 +1,19 @@
 import { Image, View } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { Card, IconButton, Text } from "react-native-paper";
 import { ArtTool } from "../types/artTool";
 import { formatTwoDecimal } from "../utils/utils";
+import { useStorage } from "../context/StorageProvider";
 
 export default function ArtToolDetailCard({ artTool }: { artTool: ArtTool }) {
+  const {
+    storage,
+    addFavorite,
+    removeFavorite,
+    loading: storageLoading,
+  } = useStorage();
+  const favoriteIds: string[] = storage.favoriteIds ? storage.favoriteIds : [];
+  const isFavorited = favoriteIds.includes(artTool.id);
+
   return (
     <Card>
       <Card.Content style={{ gap: 8 }}>
@@ -20,7 +30,31 @@ export default function ArtToolDetailCard({ artTool }: { artTool: ArtTool }) {
         </View>
 
         {/* Title, price and rating */}
-        <Text variant="labelSmall">{artTool.brand}</Text>
+        <View>
+          <Text variant="labelSmall">{artTool.brand}</Text>
+          <IconButton
+            style={{
+              position: "absolute",
+              top: -8,
+              right: -4,
+              justifyContent: "center",
+              padding: 0,
+              margin: 0,
+              aspectRatio: 1,
+            }}
+            onPress={() => {
+              if (isFavorited) {
+                removeFavorite(artTool.id);
+                return;
+              }
+              addFavorite(artTool.id);
+            }}
+            icon={isFavorited ? "heart" : "heart-outline"}
+            iconColor="crimson"
+            size={20}
+          />
+        </View>
+
         <Text variant="titleSmall" style={{ textAlign: "justify" }}>
           {artTool.artName}
         </Text>

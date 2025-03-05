@@ -1,18 +1,20 @@
-import "./gesture-handler";
 import "@expo/metro-runtime";
-import RootTabNavigator from "./src/navigation/RootTabNavigator";
-import { PaperProvider } from "react-native-paper";
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
+import merge from "deepmerge";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   MD3DarkTheme,
   MD3LightTheme,
+  PaperProvider,
   adaptNavigationTheme,
 } from "react-native-paper";
-import merge from "deepmerge";
+import "./gesture-handler";
+import RootTabNavigator from "./src/navigation/RootTabNavigator";
+import { StorageProvider } from "./src/context/StorageProvider";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -24,15 +26,19 @@ const combinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 export default function App() {
   return (
-    <PaperProvider theme={combinedDarkTheme}>
-      <NavigationContainer
-        theme={{
-          ...combinedDarkTheme,
-          fonts: { ...NavigationDarkTheme.fonts },
-        }}
-      >
-        <RootTabNavigator />
-      </NavigationContainer>
-    </PaperProvider>
+    <GestureHandlerRootView>
+      <PaperProvider theme={combinedDarkTheme}>
+        <NavigationContainer
+          theme={{
+            ...combinedDarkTheme,
+            fonts: { ...NavigationDarkTheme.fonts },
+          }}
+        >
+          <StorageProvider>
+            <RootTabNavigator />
+          </StorageProvider>
+        </NavigationContainer>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
