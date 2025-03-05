@@ -3,7 +3,7 @@ import { View } from "react-native";
 import artToolApi from "../../apis/artToolApi";
 import ArtToolCard from "../../components/ArtToolCard";
 import { ArtTool } from "../../types/artTool";
-import { Chip } from "react-native-paper";
+import { ActivityIndicator, Chip, Text } from "react-native-paper";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function HomeScreen() {
@@ -17,11 +17,14 @@ export default function HomeScreen() {
     () => artTools.filter((artTool) => selectedBrands.includes(artTool.brand)),
     [artTools, selectedBrands]
   );
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     async function fetchApi() {
+      setIsFetching(true);
       const artTools = await artToolApi.getAll();
       setArtTools(artTools);
+      setIsFetching(false);
     }
 
     fetchApi();
@@ -48,6 +51,13 @@ export default function HomeScreen() {
               </Chip>
             ))}
           </View>
+        }
+        ListEmptyComponent={
+          isFetching ? (
+            <ActivityIndicator animating={true} />
+          ) : (
+            <Text>No item found</Text>
+          )
         }
         data={filteredArtTools.length ? filteredArtTools : artTools}
         keyExtractor={(item) => item.id}

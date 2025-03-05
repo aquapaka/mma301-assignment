@@ -1,5 +1,5 @@
 export type RootTabParamList = {
-  Home: undefined;
+  HomeStack: undefined;
   Favorite: undefined;
 };
 

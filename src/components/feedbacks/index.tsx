@@ -5,7 +5,7 @@ import FeedbacksSection from "./FeedbacksSection";
 
 export default function Feedbacks({ artTool }: { artTool: ArtTool }) {
   return (
-    <Card style={{ marginTop: 8 }}>
+    <Card style={{ marginTop: 8, marginBottom: 24 }}>
       <Card.Content style={{ gap: 8 }}>
         <Text variant="titleMedium">Feedbacks</Text>
 

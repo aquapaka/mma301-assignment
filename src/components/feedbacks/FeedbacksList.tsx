@@ -18,7 +18,7 @@ export default function FeedbacksList({
       }}
     >
       {feedbacks.map((fb) => (
-        <View style={{ gap: 8 }}>
+        <View style={{ gap: 8 }} key={fb.author + fb.date}>
           <View
             key={fb.author + fb.date}
             style={{ flexDirection: "row", gap: 8, alignItems: "center" }}

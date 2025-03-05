@@ -11,10 +11,11 @@ export default function RootTabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStackNavigator}
         options={({ route }) => ({
           headerTitle: getFocusedRouteNameFromRoute(route),
+          title: "Home",
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
               name={focused ? "home" : "home-outline"}

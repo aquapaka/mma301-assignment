@@ -41,59 +41,15 @@ export default function RatingOverview({ artTool }: { artTool: ArtTool }) {
             <ProgressBar
               progress={
                 artTool.feedbacks.length > 0
-                  ? rating1Count / artTool.feedbacks.length
+                  ? rating5Count / artTool.feedbacks.length
                   : 0
               }
             />
           </View>
           <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
-            1.0
+            5.0
           </Text>
-          <Text variant="labelSmall">{rating1Count} ratings</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flex: 1,
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <ProgressBar
-              progress={
-                artTool.feedbacks.length > 0
-                  ? rating2Count / artTool.feedbacks.length
-                  : 0
-              }
-            />
-          </View>
-          <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
-            2.0
-          </Text>
-          <Text variant="labelSmall">{rating2Count} ratings</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flex: 1,
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <ProgressBar
-              progress={
-                artTool.feedbacks.length > 0
-                  ? rating3Count / artTool.feedbacks.length
-                  : 0
-              }
-            />
-          </View>
-          <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
-            3.0
-          </Text>
-          <Text variant="labelSmall">{rating3Count} ratings</Text>
+          <Text variant="labelSmall">{rating5Count} ratings</Text>
         </View>
         <View
           style={{
@@ -129,15 +85,60 @@ export default function RatingOverview({ artTool }: { artTool: ArtTool }) {
             <ProgressBar
               progress={
                 artTool.feedbacks.length > 0
-                  ? rating5Count / artTool.feedbacks.length
+                  ? rating3Count / artTool.feedbacks.length
                   : 0
               }
             />
           </View>
           <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
-            5.0
+            3.0
           </Text>
-          <Text variant="labelSmall">{rating5Count} ratings</Text>
+          <Text variant="labelSmall">{rating3Count} ratings</Text>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            alignItems: "center",
+            gap: 8,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <ProgressBar
+              progress={
+                artTool.feedbacks.length > 0
+                  ? rating2Count / artTool.feedbacks.length
+                  : 0
+              }
+            />
+          </View>
+          <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
+            2.0
+          </Text>
+          <Text variant="labelSmall">{rating2Count} ratings</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            alignItems: "center",
+            gap: 8,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <ProgressBar
+              progress={
+                artTool.feedbacks.length > 0
+                  ? rating1Count / artTool.feedbacks.length
+                  : 0
+              }
+            />
+          </View>
+          <Text variant="labelSmall" style={{ fontWeight: "bold" }}>
+            1.0
+          </Text>
+          <Text variant="labelSmall">{rating1Count} ratings</Text>
         </View>
       </View>
     </View>
