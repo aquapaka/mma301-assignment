@@ -1,5 +1,4 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
 import {
   Image,
   TouchableOpacity,

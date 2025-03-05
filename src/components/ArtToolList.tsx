@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Chip, Searchbar, Text } from "react-native-paper";
 import { ArtTool } from "../types/artTool";
-import ArtToolCard from "./ArtToolCard";
 import { fuzzySearch } from "../utils/fuzzySearch";
+import ArtToolCard from "./ArtToolCard";
 
 export default function ArtToolList({
   artTools,
